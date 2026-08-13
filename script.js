@@ -35,6 +35,18 @@
     ? `${config.status} — reach out any time.`
     : "Reach out any time.";
 
+  if (config.avatar) {
+    $("avatar-img").src = config.avatar;
+  }
+  const initials = (config.name || "")
+    .split(" ")
+    .filter(Boolean)
+    .slice(-2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+  document.querySelector(".avatar-fallback-label").textContent = initials || "?";
+
   // ---------- Links ----------
   const links = config.links || {};
   [
@@ -49,125 +61,82 @@
     else if (el) el.style.display = "none";
   });
 
-  // ---------- Skills (spreadsheet rows) ----------
-  const skillsBody = $("skills-body");
-  (config.skills || []).forEach((skill, i) => {
-    const row = document.createElement("div");
-    row.className = "sheet-row";
-    row.innerHTML = `
-      <span class="skill-name">${escapeHtml(skill.name)}</span>
-      <span class="skill-cat">${escapeHtml(skill.category || "")}</span>
-      <span class="skill-bar-track">
-        <span class="skill-bar-fill" data-level="${skill.level || 0}"></span>
-      </span>
-    `;
-    skillsBody.appendChild(row);
+  // ---------- Education ----------
+  const edu = config.education || {};
+  $("edu-institution").textContent = edu.institution || "";
+  $("edu-degree").textContent = edu.degree || "";
+  $("edu-period").textContent = edu.period || "";
+  $("edu-gpa").textContent = edu.gpa || "";
+  $("edu-expected").textContent = edu.expected || "";
+  const eduNotes = $("edu-notes");
+  (edu.notes || []).forEach((note) => {
+    const li = document.createElement("li");
+    li.textContent = note;
+    eduNotes.appendChild(li);
   });
 
-  // Animate skill bars once visible
-  const bars = document.querySelectorAll(".skill-bar-fill");
-  const fillBar = (bar) => {
-    const level = bar.getAttribute("data-level");
-    bar.style.width = prefersReducedMotion ? `${level}%` : `${level}%`;
-  };
-  if ("IntersectionObserver" in window) {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            fillBar(entry.target);
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-    bars.forEach((b) => obs.observe(b));
-  } else {
-    bars.forEach(fillBar);
-  }
+  // ---------- Skills (grouped cards) ----------
+  const skillsGrid = $("skills-grid");
+  (config.skillGroups || []).forEach((group) => {
+    const card = document.createElement("div");
+    card.className = "skill-card";
+    const items = (group.items || [])
+      .map((item) => `<li>${escapeHtml(item)}</li>`)
+      .join("");
+    card.innerHTML = `
+      <h3 class="skill-card-title">${escapeHtml(group.title)}</h3>
+      <ul class="skill-list">${items}</ul>
+    `;
+    skillsGrid.appendChild(card);
+  });
 
   // ---------- Projects ----------
-  await loadProjects(config);
+  renderProjectList(config.projects || []);
+  if (config.links && config.links.github) {
+    $("more-github").href = config.links.github;
+  }
 
   // ---------- Tab bar navigation (scrollspy) ----------
   setupTabbar();
 
   // ===================================================
 
-  async function loadProjects(cfg) {
-    const grid = $("project-grid");
-    const status = $("projects-status");
-    const max = cfg.maxProjects || 6;
+  function renderProjectList(projects) {
+    const list = $("project-list");
+    list.innerHTML = "";
 
-    // Manual projects override / supplement GitHub fetch
-    if (Array.isArray(cfg.manualProjects) && cfg.manualProjects.length) {
-      status.textContent = "curated projects";
-      renderProjects(cfg.manualProjects.slice(0, max));
+    if (!projects.length) {
+      list.innerHTML = `<p class="project-empty">No projects added yet.</p>`;
       return;
     }
 
-    if (cfg.projectsSource !== "github" || !cfg.githubUsername) {
-      status.textContent = "";
-      grid.innerHTML = `<p class="project-empty">No projects configured yet.</p>`;
-      return;
-    }
-
-    try {
-      const url = `https://api.github.com/users/${encodeURIComponent(
-        cfg.githubUsername
-      )}/repos?sort=updated&per_page=100`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`GitHub API responded ${res.status}`);
-      let repos = await res.json();
-
-      repos = repos
-        .filter((r) => !r.fork)
-        .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at))
-        .slice(0, max);
-
-      if (!repos.length) {
-        status.textContent = "";
-        grid.innerHTML = `<p class="project-empty">No public repositories yet — check back soon.</p>`;
-        return;
-      }
-
-      status.textContent = `${repos.length} repositories loaded from github.com/${cfg.githubUsername}`;
-      renderProjects(
-        repos.map((r) => ({
-          name: r.name,
-          description: r.description || "No description provided.",
-          url: r.html_url,
-          language: r.language,
-          stars: r.stargazers_count,
-        }))
-      );
-    } catch (err) {
-      console.error(err);
-      status.textContent = "";
-      grid.innerHTML = `<p class="project-error">Couldn't load repositories from GitHub right now. Refresh to try again.</p>`;
-    }
-  }
-
-  function renderProjects(projects) {
-    const grid = $("project-grid");
-    grid.innerHTML = "";
     projects.forEach((p) => {
-      const card = document.createElement("a");
-      card.className = "project-card";
-      card.href = p.url || "#";
-      card.target = "_blank";
-      card.rel = "noopener";
-      card.innerHTML = `
-        <span class="project-name">${escapeHtml(p.name)}</span>
-        <span class="project-desc">${escapeHtml(p.description || "")}</span>
-        <span class="project-meta">
-          ${p.language ? `<span class="lang-pill">${escapeHtml(p.language)}</span>` : ""}
-          ${typeof p.stars === "number" ? `<span>★ ${p.stars}</span>` : ""}
-        </span>
-        <span class="project-link">View repository →</span>
+      const entry = document.createElement("article");
+      entry.className = "project-entry";
+
+      const tools = (p.tools || [])
+        .map((t) => `<span class="tool-pill">${escapeHtml(t)}</span>`)
+        .join("");
+      const bullets = (p.bullets || [])
+        .map((b) => `<li>${escapeHtml(b)}</li>`)
+        .join("");
+
+      entry.innerHTML = `
+        <div class="project-entry-head">
+          <h3 class="project-entry-name">${escapeHtml(p.name)}</h3>
+          <span class="mono project-entry-period">${escapeHtml(p.period || "")}</span>
+        </div>
+        <div class="tool-row">${tools}</div>
+        <ul class="project-bullets">${bullets}</ul>
+        ${
+          p.url
+            ? `<a class="btn btn-ghost project-view-btn" href="${escapeAttr(
+                p.url
+              )}" target="_blank" rel="noopener">View project →</a>`
+            : ""
+        }
       `;
-      grid.appendChild(card);
+      list.appendChild(entry);
     });
   }
 
@@ -191,6 +160,10 @@
       { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
     );
     sections.forEach((s) => obs.observe(s));
+  }
+
+  function escapeAttr(str) {
+    return escapeHtml(str).replace(/`/g, "&#96;");
   }
 
   function escapeHtml(str) {

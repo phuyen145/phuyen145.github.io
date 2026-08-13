@@ -27,7 +27,6 @@
   $("qr-status").textContent = config.status || "—";
   $("qr-location").textContent = config.location || "—";
 
-  $("about-tagline").textContent = config.tagline || "";
   $("contact-sub").textContent = config.status
     ? `${config.status} — reach out any time.`
     : "Reach out any time.";

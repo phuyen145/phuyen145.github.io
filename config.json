@@ -1,0 +1,28 @@
+{
+  "githubUsername": "phuyen145",
+  "name": "Tran Thi Phuong Uyen",
+  "role": "Data Analyst",
+  "location": "Ho Chi Minh City, Vietnam",
+  "status": "Open to Fresher roles",
+  "avatar": "assets/avatar.jpg",
+  "bio": "Welcome to my portfolio! I'm currently a Management Information Systems student at HCMC Open University (HCMCOU), with hands-on experience across the full analytics workflow — from EDA and feature engineering to machine learning modeling and business-ready dashboards. Proficient in Python, SQL, and Power BI. Seeking a fresher role where I can apply data-driven thinking to real business problems and contribute to a collaborative, impact-focused team.",
+  "tagline": "This portfolio showcases my journey, projects, and skills. Feel free to explore and get in touch if you'd like to collaborate!",
+  "stack": "Python · SQL · Power BI",
+  "links": {
+    "github": "https://github.com/phuyen145",
+    "linkedin": "https://www.linkedin.com/in/phuong-uyen-tran-a9b17a391/",
+    "email": ""
+  },
+  "skills": [
+    { "name": "Python", "category": "Programming", "level": 85 },
+    { "name": "SQL", "category": "Programming", "level": 85 },
+    { "name": "Power BI", "category": "BI & Visualization", "level": 80 },
+    { "name": "Excel", "category": "BI & Visualization", "level": 85 },
+    { "name": "EDA & Feature Engineering", "category": "Modeling", "level": 80 },
+    { "name": "Machine Learning", "category": "Modeling", "level": 70 },
+    { "name": "Data Visualization", "category": "BI & Visualization", "level": 75 }
+  ],
+  "projectsSource": "github",
+  "maxProjects": 6,
+  "manualProjects": []
+}

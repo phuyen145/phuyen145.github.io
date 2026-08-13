@@ -35,6 +35,7 @@
   [
     ["link-github", links.github],
     ["link-linkedin", links.linkedin],
+    ["hero-github", links.github],
     ["hero-linkedin", links.linkedin],
     ["contact-github", links.github],
     ["contact-linkedin", links.linkedin],

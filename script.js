@@ -4,8 +4,6 @@
   const $ = (id) => document.getElementById(id);
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  document.getElementById("year").textContent = new Date().getFullYear();
-
   // ---------- Load config ----------
   let config;
   try {
@@ -23,7 +21,6 @@
   $("hero-name").textContent = config.name || "";
   $("hero-role").textContent = config.role || "";
   $("hero-bio").textContent = config.bio || "";
-  $("footer-name").textContent = config.name || "";
 
   $("qr-role").textContent = config.role || "—";
   $("qr-stack").textContent = config.stack || "—";

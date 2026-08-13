@@ -17,7 +17,6 @@
   }
 
   // ---------- Populate hero / brand ----------
-  $("brand-tag").textContent = `-- ${config.githubUsername || "user"}`;
   $("hero-name").textContent = config.name || "";
   $("hero-role").textContent = config.role || "";
   $("hero-bio").textContent = config.bio || "";

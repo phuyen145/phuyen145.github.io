@@ -35,18 +35,6 @@
     ? `${config.status} — reach out any time.`
     : "Reach out any time.";
 
-  if (config.avatar) {
-    $("avatar-img").src = config.avatar;
-  }
-  const initials = (config.name || "")
-    .split(" ")
-    .filter(Boolean)
-    .slice(-2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
-  document.querySelector(".avatar-fallback-label").textContent = initials || "?";
-
   // ---------- Links ----------
   const links = config.links || {};
   [

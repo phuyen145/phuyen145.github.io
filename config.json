@@ -11,18 +11,76 @@
   "links": {
     "github": "https://github.com/phuyen145",
     "linkedin": "https://www.linkedin.com/in/phuong-uyen-tran-a9b17a391/",
-    "email": ""
+    "email": "tranphuonguyen.contact@gmail.com",
+    "phone": "+84 968 621 514"
   },
-  "skills": [
-    { "name": "Python", "category": "Programming", "level": 85 },
-    { "name": "SQL", "category": "Programming", "level": 85 },
-    { "name": "Power BI", "category": "BI & Visualization", "level": 80 },
-    { "name": "Excel", "category": "BI & Visualization", "level": 85 },
-    { "name": "EDA & Feature Engineering", "category": "Modeling", "level": 80 },
-    { "name": "Machine Learning", "category": "Modeling", "level": 70 },
-    { "name": "Data Visualization", "category": "BI & Visualization", "level": 75 }
+
+  "education": {
+    "institution": "Ho Chi Minh City Open University (HCMCOU)",
+    "degree": "B.A. in Management Information Systems",
+    "period": "10/2023 – Present",
+    "expected": "Expected Graduation: 2027",
+    "gpa": "GPA: 3.2 / 4.0",
+    "notes": [
+      "Three-time recipient of merit-based academic scholarships",
+      "Samsung Innovation Campus – Big Data Course Certificate"
+    ]
+  },
+
+  "skillGroups": [
+    {
+      "title": "Programming & Data Processing",
+      "items": ["Python", "SQL", "Pandas", "NumPy"]
+    },
+    {
+      "title": "Machine Learning & Analytics",
+      "items": ["Scikit-learn", "Classification", "Regression", "Feature Engineering"]
+    },
+    {
+      "title": "Data Visualization & BI",
+      "items": ["Power BI", "DAX", "Excel"]
+    },
+    {
+      "title": "Tools & Platforms",
+      "items": ["Git", "GitHub", "Jupyter Notebook"]
+    }
   ],
-  "projectsSource": "github",
-  "maxProjects": 6,
-  "manualProjects": []
+
+  "projects": [
+    {
+      "name": "Stroke Risk Prediction Using Machine Learning",
+      "period": "2025",
+      "tools": ["Python", "Pandas", "Scikit-learn", "XGBoost", "LightGBM", "SMOTE", "Matplotlib", "AWS S3"],
+      "bullets": [
+        "Developed a machine learning-based stroke risk prediction system using a biomedical dataset of 5,110 patient records and 12 attributes.",
+        "Built a data pipeline including Kaggle data ingestion, Pandas preprocessing, categorical encoding, SMOTE class balancing, and model evaluation.",
+        "Compared seven classification models, including Logistic Regression, Decision Tree, Gaussian Naive Bayes, SVM, Random Forest, XGBoost, and LightGBM.",
+        "Analyzed key stroke-related features such as age, hypertension, heart disease, BMI, and average glucose level to support early risk screening."
+      ],
+      "url": "https://github.com/phuyen145/stroke-risk-prediction"
+    },
+    {
+      "name": "Spotify Vietnam Chart Analysis & Weekly Streams Prediction",
+      "period": "2026",
+      "tools": ["Python", "Pandas", "Matplotlib", "Scikit-learn", "Machine Learning"],
+      "bullets": [
+        "Analyzed 2,400 Spotify Vietnam Top 200 observations across 12 weeks to identify trends in streams, rankings, artists, and genres.",
+        "Performed data cleaning, feature engineering, exploratory data analysis (EDA), and visualization using Python, Pandas, and Matplotlib.",
+        "Built and compared Baseline, Linear Regression, and Random Forest models for next-week stream prediction, with Linear Regression achieving the best performance (R² = 0.946)."
+      ],
+      "url": "https://github.com/phuyen145/spotify-vietnam-chart-analysis"
+    },
+    {
+      "name": "Forecasting Vietnam's Transportation CPI Using Macroeconomic Factors",
+      "period": "2026 – Present",
+      "tools": ["Python", "Pandas", "Matplotlib", "Statistical Analysis", "Time Series Analysis"],
+      "bullets": [
+        "Analyzed Vietnam's Transportation CPI from 2012 to 2024 and its relationship with macroeconomic factors.",
+        "Performed data preprocessing, exploratory data analysis, correlation analysis, and time-series stationarity testing.",
+        "Investigated the impact and lagged effects of fuel prices, crude oil prices, and exchange rates on Transportation CPI.",
+        "Developed and evaluated time-series forecasting models to predict future CPI movements."
+      ],
+      "url": "https://github.com/phuyen145/vietnam-transportation-cpi-forecasting"
+    }
+  ]
 }

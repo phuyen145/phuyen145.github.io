@@ -203,35 +203,6 @@ a{ color:inherit; text-decoration:none; }
 }
 
 /* ============================================
-   About
-   ============================================ */
-.about-grid{
-  display:grid;
-  grid-template-columns:140px 1fr;
-  gap:32px;
-  align-items:center;
-}
-.avatar-frame{
-  width:140px; height:140px;
-  border-radius:14px;
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:var(--teal-dark);
-  position:relative;
-  display:flex; align-items:center; justify-content:center;
-}
-.avatar-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
-.avatar-fallback-label{ display:none; color:#fff; font-size:1.6rem; letter-spacing:0.05em; }
-.avatar-frame.avatar-fallback img{ display:none; }
-.avatar-frame.avatar-fallback .avatar-fallback-label{ display:block; }
-
-.about-tagline{
-  font-size:1.05rem;
-  color:var(--ink-soft);
-  max-width:560px;
-}
-
-/* ============================================
    Skills — spreadsheet
    ============================================ */
 .sheet{

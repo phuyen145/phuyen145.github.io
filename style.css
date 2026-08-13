@@ -110,7 +110,7 @@ a{ color:inherit; text-decoration:none; }
   gap:56px;
   align-items:center;
   padding-top:64px;
-  min-height:calc(100vh - 60px);
+  min-height:40px;
 }
 .hero-text h1{
   font-family:var(--font-display);
@@ -296,6 +296,14 @@ a{ color:inherit; text-decoration:none; }
   border-radius:var(--radius);
   padding:20px 20px 22px;
   border-top:3px solid var(--teal-dark);
+  cursor:default;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.skill-card:hover,
+.skill-card:active{
+  transform:translateY(-3px);
+  border-color:var(--teal-dark);
+  box-shadow:0 16px 34px -26px rgba(22,33,29,0.4);
 }
 .skill-card-title{
   font-family:var(--font-display);
